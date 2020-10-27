@@ -15,6 +15,7 @@ pydub = "*"
 simpleaudio = "*"
 ffmpeg = "*"
 opencv-python = "*"
+scikit-image = "*"
 
 [requires]
 python_version = "3.7.8"
