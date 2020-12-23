@@ -53,7 +53,7 @@ for(var q = 0; q < videoArray.length;q++){
     thisLayer.startTime=startTime;
     var opac = thisLayer.opacity;
     opac.setValueAtTime(thisLayer.startTime, 0);
-    opac.setValueAtTime(thisLayer.startTime + numVisual*10, 100);
+    opac.setValueAtTime(thisLayer.startTime + numVisual*20, 100);
     startTime = thisLayer.startTime + 10;
 }
 
