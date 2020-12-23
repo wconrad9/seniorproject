@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-librosa = "*"
 soundfile = "*"
 matplotlib = "*"
 numpy = "*"
@@ -16,6 +15,12 @@ simpleaudio = "*"
 ffmpeg = "*"
 opencv-python = "*"
 scikit-image = "*"
+tk = "*"
+tcl = "*"
+ffmpy = "*"
+mido = "*"
+librosa = "*"
+traitlets = "*"
 
 [requires]
-python_version = "3.7.8"
+python_version = "3.6.12"

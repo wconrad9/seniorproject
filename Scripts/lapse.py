@@ -9,13 +9,26 @@ from datetime import date
 import datetime
 import time
 
-#I think I have to specify my file
-droneFootagePaths = glob.glob("/Volumes/Workspace/wc/SeniorWork/BeldenFalls.9.12/drone/*.MP4")
-for path in droneFootagePaths:
-    cap = cv2.VideoCapture(path)
+import tkinter as tk     # from tkinter import Tk for Python 3.x
+from tkinter.filedialog import askopenfilename
 
-    name = path[-8:-4]
-    if(name == "0100"):
+tk.Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+filepath = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+print(filepath)
+
+#I think I have to specify my file
+def create_images(filepath):
+    """creates a directory filled with images for source videos"""
+
+    droneFootagePaths = glob.glob(filepath)
+
+    #print(droneFootagePaths)
+    
+    for path in droneFootagePaths:
+        
+        cap = cv2.VideoCapture(path)
+
+        name = path[-8:-4]
         print(name)
 
         #where do I want to save this
@@ -28,12 +41,12 @@ for path in droneFootagePaths:
         #params for taking timelapse from video
         seconds_duration = 100
         seconds_between_shots = 10
-        timelapse_img_dir = "/Users/wconrad/Desktop/seniorproject/vid/lapses/images"
+        timelapse_img_dir = f"/Users/wconrad/Desktop/seniorproject/vid/{name}"
 
         if not os.path.exists(timelapse_img_dir):
             os.mkdir(timelapse_img_dir)
 
-
+        
         success = 1
         frames = []
         count = 0
@@ -60,14 +73,32 @@ for path in droneFootagePaths:
             if(insertbackimage == 4):
                 insertbackimage = 1
 
+
+        print(len(frames))
+        print(frames[len(frames)-1])
+        #why is the last frame None?
+
+
+        frames.pop(len(frames)-1)
         i = 1
         for frame in frames:
             #out.write(frame)
             filename = f"{timelapse_img_dir}/{i}.jpg"
             cv2.imwrite(filename, frame)
             i +=1
+            print(i/len(frames)*100)
 
+        out.release()
+        
+        #when everything is done, release the capture
+        cap.release()
+    
+    return
 
+#when everything is done, release the capture
+cv2.destroyAllWindows() 
+
+create_images(filepath)
 
     
 
@@ -93,8 +124,5 @@ def images_to_video(out, img_dir, clear_images=True):
         for img_path in image_list:
             os.remove(img_path)
 
-#when everything is done, release the capture
-cap.release()
-out.release()
-cv2.destroyAllWindows() 
+    return
 

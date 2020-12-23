@@ -62,7 +62,7 @@ var audioLayer = tempComp.layers.add(audioArray[0]);
 for(var z = 0; q < audioArray.length;z++){
     var thisLayer = tempComp.layers.add(audioArray[z]);
     thisLayer.startTime = startTime;
-    startTime = thisLayer.outPoint;
+    //startTime = thisLayer.outPoint;
 }
 audioLayer.outPoint = duration;
 
